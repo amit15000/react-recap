@@ -57,3 +57,25 @@ const CryptoGainCalculator = memo(function ({
   return <div>Your crypto gain is {cryptoCalculator()}</div>;
 });
 ```
+
+
+# React Lazy Loading
+
+--- export component as  default
+
+like -> 
+
+export default function f_name(){
+  ----
+}
+
+
+-->import it as
+
+const CmpName = React.lazy(()=> import('./components/compName'))
+
+---> use component in return of App.tsx like->
+return (
+  <>
+  <Route path="/path_to_component" element={<Suspense fallback={"loading..."}><CmpName/><Suspense/>}/>
+)
