@@ -34,7 +34,7 @@ cryptoReturn will be caluculated when any element of dependency array chages
   );
 
 ```
-$$ Child component will not render -- if the paramemtors not change
+$$$ Child component will not render -- if the paramemtors not change
 ```
   return (
     <>
