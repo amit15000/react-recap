@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import "./App.css";
 let i = 0;
 interface BankData {
@@ -26,32 +26,53 @@ function App() {
 
   useEffect(() => {
     setTimeout(() => {
-      setBankData({ income: 100 });
-    }, 3000);
+      setExchangeData1({ returns: 100 });
+    }, 2000);
   }, []);
+
   useEffect(() => {
     setTimeout(() => {
       setExchangeData2({ returns: 200 });
-    }, 5000);
+    }, 3000);
   }, []);
 
   useEffect(() => {
     setTimeout(() => {
-      setExchangeData1({ returns: 100 });
+      setBankData({ income: 100 });
     }, 5000);
   }, []);
+  // const cryptoReturn = useMemo(() => {
+  //   console.log("hi there");
+  //   return exchangeData1.returns + exchangeData2.returns;
+  // }, [exchangeData1, exchangeData2]);
 
-  const cryptoReturn = useMemo(() => {
-    console.log("hi there");
-    return exchangeData1.returns + exchangeData2.returns;
-  }, [exchangeData1, exchangeData2]);
+  // const incomeTax = cryptoReturn + bankData.income * 0.3;
 
-  const incomeTax = cryptoReturn + bankData.income * 0.3;
+  const cryptoCalculator = useCallback(
+    function () {
+      return exchangeData1.returns + exchangeData2.returns;
+    },
+    [exchangeData1, exchangeData2]
+  );
+
   return (
     <>
-      <div>Income Tax ammount : {incomeTax}</div>
+      {/* <div>Income Tax ammount : {incomeTax}</div> */}
+
+      <CryptoGainCalculator
+        cryptoCalculator={cryptoCalculator}
+      ></CryptoGainCalculator>
     </>
   );
 }
+
+const CryptoGainCalculator = memo(function ({
+  cryptoCalculator,
+}: {
+  cryptoCalculator: () => number;
+}) {
+  console.log("Child re-render");
+  return <div>Your crypto gain is {cryptoCalculator()}</div>;
+});
 
 export default App;

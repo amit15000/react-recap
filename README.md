@@ -23,3 +23,37 @@ cryptoReturn will be caluculated when any element of dependency array chages
     return exchangeData1.returns + exchangeData2.returns;
   }, [exchangeData1, exchangeData2]);
 ```
+# useCallback and memo --- > to memorize a function
+
+```
+  const cryptoCalculator = useCallback(
+    function () {
+      return exchangeData1.returns + exchangeData2.returns;
+    },
+    [exchangeData1, exchangeData2]
+  );
+
+```
+$$ Child component will not render -- if the paramemtors not change
+```
+  return (
+    <>
+      {/* <div>Income Tax ammount : {incomeTax}</div> */}
+
+      <CryptoGainCalculator
+        cryptoCalculator={cryptoCalculator}
+      ></CryptoGainCalculator>
+    </>
+  );
+```
+
+```
+const CryptoGainCalculator = memo(function ({
+  cryptoCalculator,
+}: {
+  cryptoCalculator: () => number;
+}) {
+  console.log("Child re-render");
+  return <div>Your crypto gain is {cryptoCalculator()}</div>;
+});
+```
