@@ -1,5 +1,17 @@
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import {
+  memo,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import "./App.css";
+import { countContext } from "./contex";
+import RecoilUse from "./assets/RecoilUse";
 let i = 0;
 interface BankData {
   income: number;
@@ -14,6 +26,8 @@ interface ExchangeData {
 // const [count, setCount] = useState<CountInterface>({ counting: 0 });
 
 function App() {
+  // const count: number = useContext(countContext);
+
   const [bankData, setBankData] = useState<BankData>({ income: 0 });
   const [exchangeData1, setExchangeData1] = useState<ExchangeData>({
     returns: 0,
@@ -55,6 +69,8 @@ function App() {
     [exchangeData1, exchangeData2]
   );
 
+  const twoDPosi = useContext(countContext);
+
   return (
     <>
       {/* <div>Income Tax ammount : {incomeTax}</div> */}
@@ -62,9 +78,21 @@ function App() {
       <CryptoGainCalculator
         cryptoCalculator={cryptoCalculator}
       ></CryptoGainCalculator>
+
+      <countContext.Provider value={twoDPosi}>
+        <ContextUse />
+      </countContext.Provider>
+
+      <RecoilUse></RecoilUse>
     </>
   );
 }
+
+const ContextUse = () => {
+  const { x, y } = useContext(countContext);
+
+  return <div>{x + y}</div>;
+};
 
 const CryptoGainCalculator = memo(function ({
   cryptoCalculator,

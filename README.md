@@ -34,7 +34,7 @@ cryptoReturn will be caluculated when any element of dependency array chages
   );
 
 ```
-$$$ Child component will not render -- if the paramemtors not change
+$$ Child component will not render -- if the paramemtors not change $$
 ```
   return (
     <>
@@ -58,7 +58,7 @@ const CryptoGainCalculator = memo(function ({
 });
 ```
 
-
+```
 # React Lazy Loading
 
 --- export component as  default
@@ -79,3 +79,34 @@ return (
   <>
   <Route path="/path_to_component" element={<Suspense fallback={"loading..."}><CmpName/><Suspense/>}/>
 )
+
+# Suspense API 
+$$ Used to fetch asynchronus component, asynchronus data fetching$$
+
+# Context API
+
+```
+$$ Create a context $$
+
+```
+import { createContext } from "react";
+
+export const countContext = createContext<number>(0);
+```
+$$ Use the context $$
+
+$ wrap the component with Provider and pass context variable in value as props $
+
+```
+      <countContext.Provider value={count}>
+        <ContextUse count={count}></ContextUse>
+      </countContext.Provider>
+```
+
+$$ The componet uses passed vp $$
+
+```
+const ContextUse = ({ count }: { cou  nt: number }) => {
+  return <div>{count}</div>;
+};
+```
