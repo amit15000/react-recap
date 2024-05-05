@@ -12,6 +12,7 @@ import {
 import "./App.css";
 import { countContext } from "./contex";
 import RecoilUse from "./assets/RecoilUse";
+import { RecoilRoot } from "recoil";
 let i = 0;
 interface BankData {
   income: number;
@@ -83,7 +84,9 @@ function App() {
         <ContextUse />
       </countContext.Provider>
 
-      <RecoilUse></RecoilUse>
+      <RecoilRoot>
+        <RecoilUse></RecoilUse>
+      </RecoilRoot>
     </>
   );
 }
