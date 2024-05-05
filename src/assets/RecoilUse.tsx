@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { countAtom } from "../store/atoms/count";
+import { countAtom, evenSelector } from "../store/atoms/count";
 import UpdateState from "./UpdateState";
 
 function RecoilUse() {
@@ -10,6 +10,7 @@ function RecoilUse() {
       <UpdateState>
         <div>{onlyValue}</div>
       </UpdateState>
+      {!useRecoilValue(evenSelector) && <div>It is even</div>}
     </div>
   );
 }

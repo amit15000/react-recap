@@ -13,6 +13,7 @@ import "./App.css";
 import { countContext } from "./contex";
 import RecoilUse from "./assets/RecoilUse";
 import { RecoilRoot } from "recoil";
+import Todo from "./assets/Todo";
 let i = 0;
 interface BankData {
   income: number;
@@ -76,7 +77,7 @@ function App() {
     <>
       {/* <div>Income Tax ammount : {incomeTax}</div> */}
 
-      <CryptoGainCalculator
+      {/* <CryptoGainCalculator
         cryptoCalculator={cryptoCalculator}
       ></CryptoGainCalculator>
 
@@ -86,6 +87,9 @@ function App() {
 
       <RecoilRoot>
         <RecoilUse></RecoilUse>
+      </RecoilRoot> */}
+      <RecoilRoot>
+        <Todo></Todo>
       </RecoilRoot>
     </>
   );
@@ -94,7 +98,12 @@ function App() {
 const ContextUse = () => {
   const { x, y } = useContext(countContext);
 
-  return <div>{x + y}</div>;
+  return (
+    <div>
+      <div>Use of Context API</div>
+      <div>{x + y}</div>
+    </div>
+  );
 };
 
 const CryptoGainCalculator = memo(function ({
